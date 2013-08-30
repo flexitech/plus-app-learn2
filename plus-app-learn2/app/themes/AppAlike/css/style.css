@@ -176,6 +176,15 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	left:0px;
 	/*** offest left,right blur left,right **/
 	box-shadow:-2px 0px 10px 0px #888;
+	transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;
+}
+#wholePage header,#wholePage footer{
+	left:0px;
+	/*** offest left,right blur left,right **/
+	
+	transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;
 }
 
 #navPage{
@@ -186,7 +195,30 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	height:100%;
 	background-color:rgba(230,230,230,1);
 	height:100%;
+	transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;
 	
+}
+.inWholePage{
+	left:0px;
+	/*transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;*/
+}
+.outWholePage{
+	left:250px;
+	/*transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;*/
+}
+.inNavPage{
+	left:0px;
+	/*transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;*/
+}
+.outNavPage{
+	left:-250px;
+	width:0px !important;
+	/*transition:left 0.1s ease-out;
+	-webkit-transition:left 0.1s ease-out;*/
 }
 .mb-page{
 	white-space:nowrap;
