@@ -23,7 +23,8 @@
 	//$(document).ready(function(){
 	var t=true;
 	var btnBack=$('.button-back');
-	var wholePage=$(".wholePage #wrapper");
+	var wholePageWrapper=$(".wholePage #wrapper");
+	var wholePage=$(".wholePage");
 	var wholePageFooter=$(".wholePage footer");
 	var wholePageHeader=$(".wholePage header");
 	var navPage=$(".navPage");
@@ -42,11 +43,13 @@
 			*/
 			wholePageHeader.removeClass("inWholePage");
 			wholePageFooter.removeClass("inWholePage");
+			wholePageWrapper.removeClass("inWholePage");
 			wholePage.removeClass("inWholePage");
 			navPage.removeClass("inWholePage");
 			
 			wholePageHeader.addClass("outWholePage");
 			wholePageFooter.addClass("outWholePage");
+			wholePageWrapper.addClass("outWholePage");
 			wholePage.addClass("outWholePage");
 			navPage.addClass("outWholePage");
 			t=false;
@@ -71,12 +74,14 @@
 				wholePageHeader.removeClass("outWholePage");
 				wholePageFooter.removeClass("outWholePage");
 				wholePage.removeClass("outWholePage");
+				wholePageWrapper.removeClass("outWholePage");
 				navPage.removeClass("outWholePage");
 				
 				
 				wholePageHeader.addClass("inWholePage");
 				wholePageFooter.addClass("inWholePage");
 				wholePage.addClass("inWholePage");
+				wholePageWrapper.addClass("inWholePage");
 				navPage.addClass("inWholePage");
 				$(this).attr("data-cur","hide");
 				t=true;
