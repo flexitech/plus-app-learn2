@@ -103,6 +103,16 @@ header.navbar .container-fluid{
 	border-bottom:1px solid rgba(79,79,79,0.1);
 	height:44px;
 }
+#navPage ul li a{
+	color:rgba(79,79,79,0.5);
+	font-weight:bold;
+	display:block;
+	width:100%;
+	height:100%;
+}
+#navPage ul li a:hover{
+	text-decoration:underline;
+}
 .pnavbar-brand{
 	color:white;
 	font-size:20px;
@@ -165,7 +175,7 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	position:absolute;
 	left:0px;
 	/*** offest left,right blur left,right **/
-	box-shadow:-2px 0px 5px 0px #888;
+	box-shadow:-2px 0px 10px 0px #888;
 }
 
 #navPage{
@@ -202,6 +212,12 @@ footer{width:inherit;}
  }
   .panel-group .panel.panel-default{
 	min-width:310px;
+	max-width:310px;
+  }
+  .panel-group .panel.panel-default p{
+	
+	word-wrap:break-word;
+	white-space:normal;
   }
  .panel-group{
   width:313px;height:330px;position:relative;top:5px;margin:0px auto;
