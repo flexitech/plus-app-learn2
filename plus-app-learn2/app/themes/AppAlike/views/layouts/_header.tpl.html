@@ -21,16 +21,35 @@
 <ng-include src="app.paths.element('plus.ui')"></ng-include>
 <script>
 	//$(document).ready(function(){
-	
 	var t=true;
-	$('.button-back').click(function(){
+	var btnBack=$('.button-back');
+	var wholePage=$(".wholePage");
+	var wholePageFooter=$(".wholePage footer");
+	var wholePageHeader=$(".wholePage header");
+	var navPage=$(".navPage");
+	btnBack.click(function(){
+	
 		if (t){
-			$("#wholePage header").animate({left:"250px"},500);
+			/*$("#wholePage header").animate({left:"250px"},500);
 			$("#wholePage footer").animate({left:"250px"},500);
 			$("#wholePage").animate({left:"250px"},500);
 			
-			$("#navPage").animate({left:"0px"},500);
+			$("#navPage").animate({left:"0px"},500);*/
+			/*wholePageHeader.removeClass("inWholePage");
+			$("#wholePage footer").removeClass("inWholePage");
+			$("#wholePage").removeClass("inWholePage");
+			$("#navPage").removeClass("outNavPage");
+			*/
+			wholePageHeader.removeClass("inWholePage");
+			wholePageFooter.removeClass("inWholePage");
+			wholePage.removeClass("inWholePage");
+			navPage.removeClass("outNavPage");
 			
+			wholePageHeader.addClass("outWholePage");
+			wholePageFooter.addClass("outWholePage");
+			wholePage.addClass("outWholePage");
+			navPage.addClass("inNavPage");
+			t=false;
 			var myScroll = new iScroll($('.navPage-wrap-wrapper')[0],{
 				momentum: false,useObject:true});
 			setTimeout(function(){myScroll.refresh()},1000);
@@ -39,13 +58,28 @@
 			$(this).attr("data-cur","show");
 		}
 		else{
-				$("#wholePage header").animate({left:"0px"},500);
+				/*$("#wholePage header").animate({left:"0px"},500);
 				$("#wholePage footer").animate({left:"0px"},500);
 				$("#wholePage").animate({left:"0px"},500);
 				$("#navPage").animate({left:"-250px"},500);
-				t=true;
+				t=true;*/
 				
-			$(this).attr("data-cur","hide");
+				/*$("#wholePage header").removeClass("outWholePage");
+				$("#wholePage footer").removeClass("outWholePage");
+				$("#wholePage").removeClass("outWholePage");
+				$("#navPage").removeClass("inNavPage");*/
+				wholePageHeader.removeClass("outWholePage");
+				wholePageFooter.removeClass("outWholePage");
+				wholePage.removeClass("outWholePage");
+				navPage.removeClass("inNavPage");
+				
+				
+				wholePageHeader.addClass("inWholePage");
+				wholePageFooter.addClass("inWholePage");
+				wholePage.addClass("inWholePage");
+				navPage.addClass("outNavPage");
+				$(this).attr("data-cur","hide");
+				t=true;
 		}
 	});
 	
