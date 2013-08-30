@@ -1,0 +1,130 @@
+<div class="kratos">
+	<div class="panel-group" style="" >
+		<!--<div class="root"></div>
+		<div class="edge"></div>-->
+		<div class="image-show-next">
+			<span class="glyphicon glyphicon-circle-arrow-right"></span>
+		</div>
+		<div class="parent-horiz"  id="horiz-wrapper">
+			<div id="scroller" class="scroller-horiz" >
+				<!-- div : intro -->
+				<div class="panel panel-default" >
+					<div class="panel-heading">
+						<h3 class="panel-title" style="">Welcome to Asset Management System</h3>
+					</div>
+					<div class="panel-body" style="min-height:240px">
+						Great Start!
+						<br/>
+						Swipe this to the right!
+					</div>
+					<div class="panel-footer">By npsopeak</div>
+				</div>
+				<!-- div : sign up -->
+				<div class="panel panel-default" >
+					<div class="panel-heading">
+						<h3 class="panel-title" style="">Sign Up</h3>
+					</div>
+					<div class="panel-body container" style="min-height:240px">
+						<form class="form">
+							<div class="row form-group">
+
+								<div class="col-md-6">
+									<label for="txtUsername" class="control-label visible-md">Username
+									</label>
+								</div>
+								<div class="col-md-6">
+									<input type="text" class="form-control" id="txtUsername"
+									placeholder="Ex: npsopeak"
+									/>
+								</div>
+							</div>
+							<div class="row form-group">
+
+								<div class="col-md-6">
+									<label for="txtPassword" class="control-label  visible-md">Password
+									</label>
+								</div>
+								<div class="col-md-6">
+									<input type="password" class="form-control" id="txtPassword"
+									placeholder= 'Ex: 21jkjd834D'
+									/>
+								</div>
+							</div>
+							<div class="row form-group">
+
+								<div class="col-md-6">
+									<label for="txtEmail" class="control-label  visible-md">Email
+									</label>
+								</div>
+								<div class="col-md-6">
+									<input type="email" class="form-control" id="txtEmail"
+									placeholder= 'Ex: user@company.com'
+									/>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-xs-6 col-sm-6 col-md-6">
+									<button style="width:100%" class=" btn btn-primary">
+										Sign Up
+									</buttn>
+								</div>
+								<div class="col-xs-6  col-sm-6 col-md-6">
+									<button style="width:100%" class="btn btn-warning">
+										Log In
+									</buttn>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="panel-footer">By npsopeak</div>
+				</div>
+				<div class="panel panel-default" >
+					<div class="panel-heading">
+						<h3 class="panel-title" style="">Welcome to Asset Management System</h3>
+					</div>
+					<div class="panel-body" style="min-height:240px">
+						Great Start!
+						<br/>
+						Swipe this to the right!
+					</div>
+					<div class="panel-footer">By npsopeak</div>
+				</div>
+				<div class="panel panel-default" >
+					<div class="panel-heading">
+						<h3 class="panel-title" style="">Welcome to Asset Management System</h3>
+					</div>
+					<div class="panel-body" style="min-height:240px">
+						Great Start!
+						<br/>
+						Swipe this to the right!
+					</div>
+					<div class="panel-footer">By npsopeak</div>
+				</div>
+				<div class="panel panel-default" >
+					<div class="panel-heading">
+						<h3 class="panel-title" style="">Welcome to Asset Management System</h3>
+					</div>
+					<div class="panel-body" style="min-height:240px">
+						Great Start!
+						<br/>
+						Swipe this to the right!
+					</div>
+					<div class="panel-footer">By npsopeak</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<script>
+	var myScroll2  = new iScroll('horiz-wrapper',{snap:true,hScrollbar:false});
+	myScroll2.options.onBeforeScrollStart = function(e) {                
+        var target = e.target;
+
+        while (target.nodeType != 1) target = target.parentNode;
+
+        if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA'){
+            e.preventDefault();
+        }
+    }
+</script>

@@ -1,0 +1,53 @@
+<div class="navbar-inner"  >
+	<div class="container-fluid" ng-controller="LayoutHeaderController" hm-swipe-left="hide('.button-back');" hm-swipe-right="show('.button-back');">
+		
+			<button data-cur="hide" id="button-back" class="button-back button-nav-bar back btn "><div class="navbar-header"><span class="glyphicon glyphicon-list"></span> Menu</button>
+			<span class="pnavbar-brand" href="#">{{pageTitle}}</span>
+			<span id="button-menu-group-right">
+				<button id="" class="button-nav-bar blue btn go ">Skip <span class="glyphicon glyphicon-chevron-right"></span>
+				</button>
+			</span>
+		</div>
+		
+		
+	 
+	    
+	   
+		
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<ng-include src="app.paths.element('plus.ui')"></ng-include>
+<script>
+	//$(document).ready(function(){
+	
+	var t=true;
+	$('.button-back').click(function(){
+		if (t){
+			$("#wholePage header").animate({left:"250px"},500);
+			$("#wholePage footer").animate({left:"250px"},500);
+			$("#wholePage").animate({left:"250px"},500);
+			
+			$("#navPage").animate({left:"0px"},500);
+			
+			var myScroll = new iScroll($('.navPage-wrap-wrapper')[0],{
+				momentum: false,useObject:true});
+			setTimeout(function(){myScroll.refresh()},1000);
+			t=false;
+			
+			$(this).attr("data-cur","show");
+		}
+		else{
+				$("#wholePage header").animate({left:"0px"},500);
+				$("#wholePage footer").animate({left:"0px"},500);
+				$("#wholePage").animate({left:"0px"},500);
+				$("#navPage").animate({left:"-250px"},500);
+				t=true;
+				
+			$(this).attr("data-cur","hide");
+		}
+	});
+	
+	//});
+</script>

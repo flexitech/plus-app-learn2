@@ -1,0 +1,43 @@
+{
+	/*
+	 * Theme name, must be identical to the directory name
+	 */
+	"title" : "Cont3nt AngkorOne",
+	"author" : "nps",
+
+	"files" : {
+		"css" : ["css/bootstrap.min", "css/style"
+				],
+		"js"  : ["js/theme_controllers","js/iscroll"
+				]
+	},
+	"routes" : [
+	
+				
+		{	"path":"/startup",	
+			"layout":"layouts/main",		
+			"template":"startup", 
+			"title":"Register",
+			"class":"room",
+			"controller":"StartUpController",
+			"transition":"slide"
+		},
+		{	"path":"/home",	
+			"layout":"layouts/main",		
+			"template":"home", 
+			"title":"Plus Learn Home",
+			"class":"home media ",
+			"controller":"HomeController",
+			"transition":"slide"},
+			
+		{	"path":"/rooms",	
+			"layout":"layouts/main",		
+			"template":"rooms", 
+			"title":"Rooms",
+			"class":"room media",
+			"controller":"HomeController",
+			"transition":"slide"
+		},
+		{ "otherwise" : "/home" }
+	]
+}
