@@ -234,6 +234,8 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
   100% { -webkit-transform: translate3d(-250px, 0, 0); }
 }
 .inWholePage{
+-webkit-backface-visibility: hidden;
+-webkit-perspective: 1000;
 	/*left:0px;*/
 	animation: np_slideOutFromRight 1s;
 	-webkit-animation: np_slideOutFromRight 1s;
@@ -241,6 +243,8 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	-webkit-transition:left 0.1s ease-out;*/
 }
 .outWholePage{
+-webkit-backface-visibility: hidden;
+-webkit-perspective: 1000;
 	/*left:250px;*/
 	animation: np_slideInFromLeft 1s;
 	-webkit-animation: np_slideInFromLeft 1s;
@@ -248,6 +252,8 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	-webkit-transition:left 0.1s ease-out;*/
 }
 .inNavPage{
+-webkit-backface-visibility: hidden;
+-webkit-perspective: 1000;
 	/*left:0px;*/
 	animation: np_nav_slideInFromLeft 1s;
 	-webkit-animation: np_nav_slideInFromLeft 1s;
@@ -255,6 +261,8 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	-webkit-transition:left 0.1s ease-out;*/
 }
 .outNavPage{
+-webkit-backface-visibility: hidden;
+-webkit-perspective: 1000;
 	/*left:-250px;
 	width:0px !important;*/
 	animation: np_nav_slideOutFromRight 1s;
