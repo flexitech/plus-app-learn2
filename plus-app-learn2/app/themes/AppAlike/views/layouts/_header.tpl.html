@@ -45,13 +45,13 @@
 			wholePageFooter.removeClass("inWholePage");
 			wholePageWrapper.removeClass("inWholePage");
 			/*wholePage.removeClass("inWholePage");*/
-			navPage.removeClass("inWholePage");
+			navPage.removeClass("outNavPage");
 			
 			wholePageHeader.addClass("outWholePage");
 			wholePageFooter.addClass("outWholePage");
 			wholePageWrapper.addClass("outWholePage");
 			/*wholePage.addClass("outWholePage");*/
-			navPage.addClass("outWholePage");
+			navPage.addClass("inNavPage");
 			t=false;
 			var myScroll = new iScroll($('.navPage-wrap-wrapper')[0],{
 				momentum: false,useObject:true});
@@ -75,14 +75,14 @@
 				wholePageFooter.removeClass("outWholePage");
 				/*wholePage.removeClass("outWholePage");*/
 				wholePageWrapper.removeClass("outWholePage");
-				navPage.removeClass("outWholePage");
+				navPage.removeClass("inNavPage");
 				
 				
 				wholePageHeader.addClass("inWholePage");
 				wholePageFooter.addClass("inWholePage");
 				/*wholePage.addClass("inWholePage");*/
 				wholePageWrapper.addClass("inWholePage");
-				navPage.addClass("inWholePage");
+				navPage.addClass("outNavPage");
 				$(this).attr("data-cur","hide");
 				t=true;
 		}

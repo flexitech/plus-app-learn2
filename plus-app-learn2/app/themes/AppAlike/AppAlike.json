@@ -25,7 +25,7 @@
 		{	"path":"/home",	
 			"layout":"layouts/main",		
 			"template":"home", 
-			"title":"Plus Learn Home",
+			"title":"Home",
 			"class":"home media ",
 			"controller":"HomeController",
 			"transition":"slide"},
@@ -36,6 +36,16 @@
 			"title":"Rooms",
 			"class":"room media",
 			"controller":"HomeController",
+			"transition":"slide"
+		},
+		
+		
+		{	"path":"/vaults",	
+			"layout":"layouts/main",		
+			"template":"vaults", 
+			"title":"Vaults",
+			"class":"vaults",
+			"controller":"VaultController",
 			"transition":"slide"
 		},
 		{ "otherwise" : "/home" }

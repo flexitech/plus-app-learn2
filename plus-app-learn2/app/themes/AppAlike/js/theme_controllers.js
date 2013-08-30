@@ -6,21 +6,6 @@
  * 3) $http: This is angular service to  post and get data from external sources
  */
 
-$app.controller('HomeController', function($scope, $http){
-
-  
-
-});
-$app.controller('RoomController', function($scope, $http){
-
-  
-
-});
-$app.controller('StartUpController', function($scope, $http){
-
-  $scope.isLogin = true;
-
-});
 
 $app.controller('LayoutController', function($scope, $http){
 
@@ -55,5 +40,37 @@ $app.controller('LayoutHeaderController', function($scope, $http,$location){
 		}
 		
 	}
+});
+$app.controller('HomeController', function($scope, $http){
+	$scope.isLogin = false;
+  
+
+});
+$app.controller('RoomController', function($scope, $http){
+
+  
+
+});
+$app.controller('VaultController', function($scope, $http){
+	var  lastButton = null;
+	$scope.showDelete=function(o){
+		$scope.hideDelete();
+		lastButton = $(o);
+		lastButton.removeClass('hideDeleteButton');
+		lastButton.addClass('showDeleteButton');
+	}
+	$scope.hideDelete=function(){
+		if (lastButton!=null){
+			lastButton.removeClass('showDeleteButton');
+			lastButton.addClass('hideDeleteButton');
+		}
+	}
+  
+
+});
+$app.controller('StartUpController', function($scope, $http){
+
+  $scope.isLogin = true;
+
 });
 
