@@ -22,7 +22,7 @@ $app.directive('tabbarMenu', function(){
         //if is not a top level route, continue
         if(segments.length > 2 && !_.isEmpty(segments[2]))
           continue;
-		console.log(route.title);
+		
         if(angular.isUndefined(route.class)) route.class = '';
 		if (route.class.indexOf('media')<0) continue;
         if($location.path() == route.path){

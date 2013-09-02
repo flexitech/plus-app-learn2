@@ -35,7 +35,7 @@
 			"template":"rooms", 
 			"title":"Rooms",
 			"class":"room media",
-			"controller":"HomeController",
+			"controller":"RoomController",
 			"transition":"slide"
 		},
 		
@@ -46,6 +46,50 @@
 			"title":"Vaults",
 			"class":"vaults",
 			"controller":"VaultController",
+			"transition":"slide"
+		},{	"path":"/vaults/:id/:mode",	
+			"layout":"layouts/main",		
+			"template":"new_vaults", 
+			"title":"New Vaults",
+			"class":"new_vaults",
+			"controller":"VaultInfoController",
+			"transition":"slide"
+		},
+		{	"path":"/assets/:vault_id",	
+			"layout":"layouts/main",		
+			"template":"assets", 
+			"title":"Assets",
+			"class":"assets",
+			"controller":"AssetController",
+			"transition":"slide"
+		},{	"path":"/new_assets/:id/:mode",	
+			"layout":"layouts/main",		
+			"template":"new_assets", 
+			"title":"New Assets",
+			"class":"new_assets",
+			"controller":"AssetInfoController",
+			"transition":"slide"
+		},{	"path":"/asset_pricing/:id/:mode",	
+			"layout":"layouts/main",		
+			"template":"asset_pricing", 
+			"title":"Asset Pricing",
+			"class":"asset_pricing",
+			"controller":"AssetPricingController",
+			"transition":"slide"
+		},{	"path":"/view_asset/:id",	
+			"layout":"layouts/main",		
+			"template":"view_asset", 
+			"title":"View Asset",
+			"class":"view_asset",
+			"controller":"AssetViewController",
+			"transition":"slide"
+		},
+		{	"path":"/login",	
+			"layout":"layouts/main",		
+			"template":"login", 
+			"title":"Login",
+			"class":"login",
+			"controller":"LoginController",
 			"transition":"slide"
 		},
 		{ "otherwise" : "/home" }

@@ -10,7 +10,7 @@ angular.module('app', ['app.dependencies']).
   		var route = settings.theme.routes[i];
       var template = (_.isUndefined(route.layout))?route.template:route.layout;
 
-console.log(route.transition);
+
   		if(!_.isUndefined(route.path)){
 		
   			$routeProvider.when(route.path, {templateUrl: 'app/themes/' + settings.app.theme + '/views/' + template + '.tpl.html',transition:'modal', controller: ((typeof route.controller !== 'undefined')?route.controller:'')});

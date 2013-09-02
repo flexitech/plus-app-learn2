@@ -8,7 +8,7 @@
 		<div class="parent-horiz"  id="horiz-wrapper">
 			<div id="scroller" class="scroller-horiz" >
 				<!-- div : intro -->
-				<div class="panel panel-default" >
+				<div class="panel panel-default"  ng-hide="isformRegisterDone()">
 					<div class="panel-heading">
 						<h3 class="panel-title" style="">Welcome to Asset Management System</h3>
 					</div>
@@ -20,12 +20,12 @@
 					<div class="panel-footer">By npsopeak</div>
 				</div>
 				<!-- div : sign up -->
-				<div class="panel panel-default" >
+				<div class="panel panel-default" ng-hide="isformRegisterDone()">
 					<div class="panel-heading">
 						<h3 class="panel-title" style="">Sign Up</h3>
 					</div>
 					<div class="panel-body container" style="min-height:240px">
-						<form class="form">
+						<form class="form" name="form"  novalidate>
 							<div class="row form-group">
 
 								<div class="col-md-6">
@@ -33,7 +33,7 @@
 									</label>
 								</div>
 								<div class="col-md-6">
-									<input type="text" class="form-control" id="txtUsername"
+									<input type="text" class="form-control" id="txtUsername" ng-model="registerinfo.username" required
 									placeholder="Ex: npsopeak"
 									/>
 								</div>
@@ -45,7 +45,7 @@
 									</label>
 								</div>
 								<div class="col-md-6">
-									<input type="password" class="form-control" id="txtPassword"
+									<input type="password" class="form-control" id="txtPassword" ng-model="registerinfo.password" required
 									placeholder= 'Ex: 21jkjd834D'
 									/>
 								</div>
@@ -57,19 +57,19 @@
 									</label>
 								</div>
 								<div class="col-md-6">
-									<input type="email" class="form-control" id="txtEmail"
+									<input type="email" class="form-control" id="txtEmail" ng-model="registerinfo.email" required
 									placeholder= 'Ex: user@company.com'
 									/>
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-xs-6 col-sm-6 col-md-6">
-									<button style="width:100%" class=" btn btn-primary">
+									<button ng-disabled="form.$invalid" ng-click="register(registerinfo)" style="width:100%" class=" btn btn-primary">
 										Sign Up
 									</buttn>
 								</div>
 								<div class="col-xs-6  col-sm-6 col-md-6">
-									<button style="width:100%" class="btn btn-warning">
+									<button style="width:100%" class="btn btn-warning" hm-tap="$navigate.go('login','slide')">
 										Log In
 									</buttn>
 								</div>
@@ -79,12 +79,12 @@
 					<div class="panel-footer">By npsopeak</div>
 				</div>
 				<!-- div : set up asset vault -->
-				<div class="panel panel-default" >
+				<div class="panel panel-default" ng-hide="isformVaultDone()" >
 					<div class="panel-heading">
 						<h3 class="panel-title" style="">Setup Your Vault</h3>
 					</div>
-					<div class="panel-body" style="min-height:240px">
-						<form class="form" id="formSetupVault">
+					<div class="panel-body" style="min-height:240px" >
+						<form class="form" id="formSetupVault" name="formVault" novalidate>
 							<div class="row form-group">
 
 								<div class="col-md-6">
@@ -92,7 +92,7 @@
 									</label>
 								</div>
 								<div class="col-md-6">
-									<input type="text" require class="form-control" id="txtVaultName"
+									<input type="text" require class="form-control" id="txtVaultName" ng-model="vault.name" required
 									placeholder="Ex: super-vault"
 									/>
 								</div>
@@ -104,7 +104,7 @@
 									</label>
 								</div>
 								<div class="col-md-6">
-									<input type="password" class="form-control" id="txtVaultPass"
+									<input type="password" class="form-control" id="txtVaultPass" ng-model="vault.password" 
 									placeholder= 'Ex: 21jkjd834D'
 									/>
 								</div>
@@ -112,12 +112,12 @@
 							<div class="row form-group">
 
 								<div class="col-md-12">							
-									<input type="checkbox" value=""> Single Sign on to this vault
+									<input type="checkbox" value="" ng-model="vault.single_sign"> Single Sign on to this vault
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12">
-									<button class="btn btn-warning" style="width:100%;">Set Up</button>
+									<button ng-disabled="formVault.$invalid " class="btn btn-warning" style="width:100%;" ng-click="setupVault(vault)">Set Up</button>
 								</div>
 							</div>
 						</form>
@@ -146,7 +146,7 @@
 						<p>
 							Finished already? Got disappointed!
 							<br/>
-							So click here to see what inside this box... <button class="btn btn-info">Magic Box</button>
+							So click here to see what inside this box... <button class="btn btn-info" ng-click="finish()">Magic Box</button>
 						</p>
 					</div>
 					<div class="panel-footer">By npsopeak</div>
@@ -158,6 +158,7 @@
 </div>
 <script>
 	var myScroll2  = new iScroll('horiz-wrapper',{snap:true,hScrollbar:false});
+	
 	myScroll2.options.onBeforeScrollStart = function(e) {                
         var target = e.target;
 
