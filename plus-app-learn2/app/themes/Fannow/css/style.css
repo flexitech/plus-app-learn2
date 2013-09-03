@@ -223,7 +223,7 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	color:#fdb913;
 }
 .scroller-horiz{
- position:absolute; height:90%; }
+ position:absolute; top:10px; bottom:5px;}
  
  .listing-group .listing .listing-body .listing-box.event {
 	width:auto;position:relative;
