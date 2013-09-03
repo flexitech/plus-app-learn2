@@ -175,6 +175,8 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	cursor:pointer;
 	
 }
+footer .navbar-inner .container-fluid .menu ul li.home{
+}
 .clear{clear:both;}
 #wholePage{
 	/*height:100%;

@@ -1,0 +1,28 @@
+{
+	/*
+	 * Theme name, must be identical to the directory name
+	 */
+	"title" : "Cont3nt AngkorOne",
+	"author" : "nps",
+
+	"files" : {
+		"css" : ["css/bootstrap.min", "css/style"
+				],
+		"js"  : ["js/theme_controllers","js/iscroll","js/jquery.bxslider"
+				]
+	},
+	"routes" : [
+	
+				
+		{	"path":"/startup",	
+			"layout":"layouts/main",		
+			"template":"startup", 
+			"title":"Home",
+			"class":"home media",
+			"controller":"StartUpController",
+			"transition":"slide"
+		},
+		
+		{ "otherwise" : "/home" }
+	]
+}

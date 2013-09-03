@@ -27,24 +27,24 @@
 					<ul>
 						<li class="category"> <span class=""></span> Important
 						</li>
-						<li> <span class=""></span> <a href="#">Unpaid Invoices <span class="badge pull-right">99+</span></a>
+						<li ng-repeat="notice in importantNotice"> <span class=""></span> <a href="#">{{notice.text}} <span class="badge pull-right">{{notice.value}}</span></a>
 						</li>
-						<li> <span class=""></span> <a href="#">Due Invoices <span class="badge pull-right">99+</span></a>
+						<!-- <li> <span class=""></span> <a href="#">Due Invoices <span class="badge pull-right">99+</span></a>
 						</li>
 						<li> <span class=""></span> <a href="#">Message <span class="badge pull-right">99+</span></a>
-						</li>
+						</li> -->
 					</ul>
 				</li>
 				<li class="group" ng-show="userLogined()">
 					<ul>
 						<li class="category"> <span class=""></span> Current Assets
 						</li>
-						<li> <span class=""></span> <a href="#">Rooms <span class="badge pull-right">99+</span></a>
+						<li ng-repeat="asset in current_assets"> <span class=""></span> <a hm-tap="$navigate.go('assets/viewby/{{asset.asset_type}}','slide')"> {{asset.asset_type}} <span class="badge pull-right">{{asset.asset_count}}</span></a>
 						</li>
-						<li> <span class=""></span> <a href="#"> Bikes <span class="badge pull-right">99+</span></a>
+						<!-- <li> <span class=""></span> <a href="#"> Bikes <span class="badge pull-right">99+</span></a>
 						</li>
 						<li> <span class=""></span> <a href="#">Cars <span class="badge pull-right">99+</span></a>
-						</li>
+						</li> -->
 					</ul>
 				</li>
 			</ul>
@@ -52,6 +52,19 @@
 	</div>
 </div>
 <script>
+	
+	var myScroll;
+	setTimeout(function(){
+		var myScroll = new iScroll($('#navPage-wrap-wrapper')[0],{userObject:true});
+		/*setInterval(function(){
+			console.log("dfdfdfd" + myScroll);
+			if (myScroll!=undefined){
+				myScroll.refresh();
+			}
+		},1000);*/
+		}
+	,1000);
+
 
 </script>
 <div id="wholePage" class="wholePage">

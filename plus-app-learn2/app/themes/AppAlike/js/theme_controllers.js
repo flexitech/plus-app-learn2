@@ -45,6 +45,9 @@ $app.factory('LocalMyDb',function(){
 		db["assets"] = dbAccess.db.query("assets");
 		db["asset_pricing"] = dbAccess.db.query("asset_pricing");
 		db["master_db"] = dbAccess.db.query("master_db");
+		db["invoice_detail"] = dbAccess.db.query("invoice_detail");
+		db["billing_plans"] = dbAccess.db.query("billing_plans");
+		db["invoices"] = dbAccess.db.query("invoices");
 		return angular.toJson(db);
 	}
 	if (dbAccess.db.isNew()){
@@ -60,6 +63,12 @@ $app.factory('LocalMyDb',function(){
 		dbAccess.db.createTable("asset_pricing",["asset_id","pricing_name","pricing_type","price","currency","due_pricing_date"]);
 		/// create master table
 		dbAccess.db.createTable("master_db",["fresh_installation","installation_date","username"]);
+		/// create table billing plan
+		dbAccess.db.createTable("billing_plans",["plan_name","created_date","due_date","tag","asset_id","note","user_id"]); //Asset_id ref assets(ID)
+		/// create table invoice
+		dbAccess.db.createTable("invoices",["billing_plan_id","created_date","total_value","paid","due_paid"]); //billing_plan_id ref billing_plan(ID)
+		/// create table invoice detail
+		dbAccess.db.createTable("invoice_detail",["invoice_id","pricing_id","qty","amount"]); //invoice_id ref invoices(ID), pricing_id ref asset_pricing(ID)
 		//// lib commit
 		dbAccess.db.commit();
 	}
@@ -77,26 +86,110 @@ $app.controller('NavController', function($scope, $http,$location,CacheServiceAp
 		
 		return tmp;
 	}
+
+	var uname = CacheServiceApp.get("login_user");
+	var usertmp = LocalMyDb.db.query("users",{user_name:uname})[0];
+	var uid=-1;
+	if (usertmp!=undefined)
+		uid = LocalMyDb.db.query("users",{user_name:uname})[0].ID;
+
+	$scope.importantNotice = [{text:"Unpaid Invoices",value:0},{text:"Due Invoices",value:0},{text:"Message",value:0}];
+	////load data for notice
+	function loadDataForNotice(){
+		if (uid==undefined || uid<=0){
+			
+			return;
+		}
+
+		var billingOfUser = LocalMyDb.db.query("billing_plans",{user_id:uid});
+		
+		$scope.importantNotice[0].value = _.filter(LocalMyDb.db.query("invoices"),function(row){
+			return _.where(billingOfUser,{ID:parseInt(row.billing_plan_id)}).length>0;
+		}).length;
+		
+		$scope.importantNotice[1].value = _.filter(billingOfUser,function(row){
+			
+			var currentDate = new Date();
+			var mydate = Date.parse(row.due_date);
+			var lowerDate = new Date(mydate);
+			lowerDate.setDate(lowerDate.getDate()-5);
+
+
+			//get invoices for the current bill plan
+			var invs = LocalMyDb.db.query("invoices",{billing_plan_id:row.ID+""});
+			var inv=null;
+			var isInvCreateYet = false;
+			if (invs.length>0){
+				inv = invs[invs.length-1];
+			}
+			if (inv==null || inv==undefined){
+				isInvCreateYet = false;
+			}
+			else{
+				var lastInvDate = Date.parse()
+				isInvCreateYet = 
+			}
+			
+
+			console.log("currentDate:" + currentDate + ",lowerDate: " + lowerDate);
+			return lowerDate<=currentDate && !isInvCreateYet;
+		}).length;
+	}
 	$scope.logoff = function(){
 		CacheServiceApp.remove("login_user");
 		LocalMyDb.db.deleteRows("master_db");
 		LocalMyDb.db.commit();
 		$location.path("/login");
 	}
-	
+	$scope.current_assets=[];
+	////get all assets
+	function getCurrentAssets(){
+		if (uid==undefined || uid<=0){
+			
+			return;
+		}
+		$scope.current_assets=[];
+		var vaultofUser = LocalMyDb.db.query("vaults",{user_id:uid});
+		
+		var assets =_.filter(LocalMyDb.db.query("assets",{}),
+				function(row){
+					
+					return _.where(vaultofUser,{ID:parseInt(row.vault_id+"")}).length>0;
+				}
+			);
+		var tmp = _.countBy(assets,'asset_type');
+		_.each(tmp,function(value,key){
+		$scope.current_assets.push({asset_type:key,asset_count:value});
+
+		});
+		
+	}
+	if ($scope.userLogined()){
+		getCurrentAssets();
+		loadDataForNotice();
+	}
 });
 
 
-$app.controller('LayoutHeaderController', function($scope, $http,$location,CacheServiceApp,MethodHandler){
+$app.controller('LayoutHeaderController', function($scope, $http,$location,CacheServiceApp,MethodHandler,$routeParams){
+
+
 
 	$scope.pageTitle = "Assets";
 	var routes = settings.theme.routes;
 	
 	//check for top level routes only
 	for(var i in routes){
-	
+		
 		var route = routes[i];
-		if (route.path == $location.path()){
+		var routepath = route.path + "";
+		var locpath = $location.path() + "";
+		var routeslash = routepath.substr(1,routepath.length-1).indexOf('/');
+		var locslash = locpath.substr(1,locpath.length-1).indexOf('/');
+		locslash=locslash>0?locslash:locpath.length;
+		routeslash=routeslash>0?routeslash:routeslash.length;
+		if (routepath.substr(0,routeslash) == locpath.substr(0,locslash)){
+			
 			$scope.pageTitle = route.title;
 		}
 	}
@@ -105,12 +198,14 @@ $app.controller('LayoutHeaderController', function($scope, $http,$location,Cache
 			$(t).click();
 			$(t).attr("data-cur","show");
 		}
+		console.log("come show");
 	}
 	$scope.hide=function(t){
 		if ($(t).attr("data-cur")=="show"){
 			$(t).click();
 			$(t).attr("data-cur","hide");
 		}
+		console.log("come hide");
 		
 	}
 	$scope.isLogin=false;
@@ -138,6 +233,8 @@ $app.controller('RoomController', function($scope, $http,MethodHandler){
 
 });
 $app.controller('AssetViewController', function($scope, $http,LocalMyDb,CacheServiceApp,MethodHandler,$routeParams,$navigate){
+	
+
 	$scope.id=0;
 	$scope.asset =null;
 
@@ -176,7 +273,7 @@ $app.controller('AssetViewController', function($scope, $http,LocalMyDb,CacheSer
 	}
 });
 $app.controller('AssetPricingController', function($scope, $http,LocalMyDb,CacheServiceApp,MethodHandler,$routeParams,$navigate){
-
+	
 
 	MethodHandler.show=true;
 	MethodHandler.text="Vaults";
@@ -279,6 +376,8 @@ $app.controller('AssetPricingController', function($scope, $http,LocalMyDb,Cache
 	
 });
 $app.controller('AssetInfoController', function($scope, $http,LocalMyDb,CacheServiceApp,MethodHandler,$routeParams,$navigate){
+	
+
 	//asset init
 	$scope.assetinfo={asset_name:"",asset_value:"",asset_type:""};
 
@@ -362,13 +461,6 @@ $app.controller('AssetInfoController', function($scope, $http,LocalMyDb,CacheSer
 	}
 });
 $app.controller('AssetController', function($scope, $http,LocalMyDb,CacheServiceApp,MethodHandler,$routeParams,$navigate){
-	$scope.vaultid=0;
-	if ($routeParams.vault_id==null || $routeParams.vault_id==undefined || $routeParams.vault_id<1){
-		$navigate.go("vaults","slide");
-	}
-	else{
-		$scope.vaultid = $routeParams.vault_id;
-	}
 	var  lastButton = null;
 	$scope.assets=[];
 	MethodHandler.text="New";
@@ -390,8 +482,40 @@ $app.controller('AssetController', function($scope, $http,LocalMyDb,CacheService
 			lastButton.addClass('hideDeleteButton');
 		}
 	}
-	$scope.getAsset=function(assetid){
+  	$scope.showAsset=function(id){
+  		$navigate.go("view_asset/" + id,"slide");
+  	}
+  	$scope.vaultid=0;
+  	$scope.asset_type = null;
+	if ($routeParams.mode==undefined){
+		
+		if ($routeParams.vault_id==null || $routeParams.vault_id==undefined || $routeParams.vault_id<1){
+			$navigate.go("vaults","slide");
+		}
+		else{
+			$scope.vaultid = $routeParams.vault_id;
+		}
+		
+		$scope.getAsset=function(assetid){
 
+		}
+		
+	  	getAssets();
+	}
+	else{
+		$scope.asset_type = $routeParams.asset_type;
+		if ($scope.asset_type!=null && $scope.asset_type!=undefined){
+
+			$scope.assets = LocalMyDb.db.query("assets",{asset_type:$scope.asset_type});
+
+		}
+		MethodHandler.text="Vaults";
+		MethodHandler.show=true;
+		MethodHandler.icon_class ="glyphicon glyphicon-chevron-right";
+		MethodHandler.func=function(){
+			
+			$navigate.go("vaults","slide");
+		};
 	}
 	function getAssets(){
   		//get user id
@@ -399,12 +523,10 @@ $app.controller('AssetController', function($scope, $http,LocalMyDb,CacheService
   		$scope.assets = LocalMyDb.db.query("assets",{vault_id:$scope.vaultid});
 
   	}
-  	$scope.showAsset=function(id){
-  		$navigate.go("view_asset/" + id,"slide");
-  	}
-  	getAssets();
+	
 });
 $app.controller('VaultInfoController', function($scope, $http,LocalMyDb,CacheServiceApp,MethodHandler,$navigate,$routeParams){
+	
 	MethodHandler.text="Back";MethodHandler.icon_class ="glyphicon glyphicon-chevron-left";
   	MethodHandler.func=function(){
   		$navigate.go("vaults","slide");
@@ -448,7 +570,7 @@ $app.controller('VaultInfoController', function($scope, $http,LocalMyDb,CacheSer
 			else{
 				var uname=CacheServiceApp.get("login_user");
 				if (uname!=undefined){
-					var uid = LocalMyDb.db.query("users",{username:uname})[0].user_id;
+					var uid = LocalMyDb.db.query("users",{user_name:uname})[0].ID;
 
 					var currentDate = new Date();
 					var created = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getFullYear();
@@ -501,6 +623,7 @@ $app.controller('VaultInfoController', function($scope, $http,LocalMyDb,CacheSer
 	}
 });
 $app.controller('VaultController', function($scope, $http,LocalMyDb,CacheServiceApp,MethodHandler,$navigate){
+	
 
 	var  lastButton = null;
 	$scope.vaults=[];
@@ -527,7 +650,7 @@ $app.controller('VaultController', function($scope, $http,LocalMyDb,CacheService
 			alert("Cannot Delete this vault!");
 		}
 		else{
-			LocalMyDb.db.delete("vaults",{ID:id});
+			LocalMyDb.db.deleteRows("vaults",{ID:id});
 			getVaults();
 
 		}
@@ -540,7 +663,8 @@ $app.controller('VaultController', function($scope, $http,LocalMyDb,CacheService
   	function getVaults(){
   		//get user id
   		var name = CacheServiceApp.get("login_user");
-  		var id = LocalMyDb.db.query("users",{user_name:name}).ID;
+  		var id = LocalMyDb.db.query("users",{user_name:name})[0].ID;
+  		
   		$scope.vaults = LocalMyDb.db.query("vaults",{user_id:id});
 
   	}
@@ -662,6 +786,7 @@ $app.controller('StartUpController', function($scope, $http,LocalMyDb,$navigate,
 		var currentDate = new Date();
 		var created = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getFullYear();
 		//set first installation
+		LocalMyDb.db.deleteRows("master_db");
 		LocalMyDb.db.insert("master_db",{fresh_installation:true,installation_date:created,username:login_username});
 		LocalMyDb.db.commit();
 		$navigate.go("login","slide");
@@ -700,6 +825,12 @@ $app.controller('LoginController', function($scope, $http,LocalMyDb,$navigate,Ca
 			CacheServiceApp.put("login_user",logininfo.username);
 			alert(CacheServiceApp.get("login_user"));
 			$navigate.go("vaults","slide");
+			console.log("username:" + logininfo.username);
+			var currentDate = new Date();
+			var created = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getFullYear();
+			LocalMyDb.db.deleteRows("master_db");
+			LocalMyDb.db.insert("master_db",{fresh_installation:true,installation_date:created,username:logininfo.username});
+			LocalMyDb.db.commit();
 		}
 		else
 		{

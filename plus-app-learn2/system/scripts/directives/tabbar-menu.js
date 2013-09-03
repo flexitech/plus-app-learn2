@@ -4,7 +4,7 @@ $app.directive('tabbarMenu', function(){
     // restrict to an attribute (A = attribute, C = class, M = comment)
     restrict: 'AEC',
     template:
-	'<div class="menu"><ul><li ng-repeat="route in routes" class="{{route.class}}" hm-tap="$navigate.go(route.path, route.transition)"> <span>{{ route.title }}</span></li></ul></div>',
+	'<div class="menu"><ul><li ng-repeat="route in routes" class="{{route.class}}" hm-tap="$navigate.go(route.path, route.transition)"> <div class="icon"><span>{{ route.title }}</span></div></li></ul></div>',
 
     controller: function($scope, $location) {
       var routes = settings.theme.routes;

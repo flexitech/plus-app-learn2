@@ -8,7 +8,7 @@
 	"files" : {
 		"css" : ["css/bootstrap.min", "css/style"
 				],
-		"js"  : ["js/theme_controllers","js/iscroll"
+		"js"  : ["js/theme_controllers","js/iscroll","js/theme_transaction_controller"
 				]
 	},
 	"routes" : [
@@ -30,16 +30,46 @@
 			"controller":"HomeController",
 			"transition":"slide"},
 			
-		{	"path":"/rooms",	
+		{	"path":"/billing_plan_view",	
 			"layout":"layouts/main",		
-			"template":"rooms", 
-			"title":"Rooms",
-			"class":"room media",
-			"controller":"RoomController",
+			"template":"transactions/billing_plan_view", 
+			"title":"Billing Plan",
+			"class":"billing_plan_view media",
+			"controller":"BillingPlanViewController",
 			"transition":"slide"
 		},
-		
-		
+		{	"path":"/billing_plan_view_all_assets",	
+			"layout":"layouts/main",		
+			"template":"transactions/billing_plan_view_all_assets", 
+			"title":"Select an Asset",
+			"class":"billing_plan_view_all_assets",
+			"controller":"BillingPlanViewAllAssetController",
+			"transition":"slide"
+		},
+		{	"path":"/billing_plan_info/:id/:mode",	
+			"layout":"layouts/main",		
+			"template":"transactions/billing_plan_info", 
+			"title":"Create a plan",
+			"class":"billing_plan_info",
+			"controller":"BillingPlanInfoController",
+			"transition":"slide"
+		},
+		{	"path":"/invoice_view_all_billing_plan.tpl/:val/:mode",	
+			"layout":"layouts/main",		
+			"template":"transactions/invoice_view_all_billing_plan.tpl", 
+			"title":"Invoices",
+			"class":"invoice_view_all_billing_plan.tpl",
+			"controller":"InvoiceViewAllBillingPlanController",
+			"transition":"slide"
+		},
+		{	"path":"/invoice_view_all_billing_plan.tpl",	
+			"layout":"layouts/main",		
+			"template":"transactions/invoice_view_all_billing_plan", 
+			"title":"Invoices",
+			"class":"invoice_view_all_billing_plan.tpl media",
+			"controller":"InvoiceViewAllBillingPlanController",
+			"transition":"slide"
+		},
 		{	"path":"/vaults",	
 			"layout":"layouts/main",		
 			"template":"vaults", 
@@ -62,7 +92,16 @@
 			"class":"assets",
 			"controller":"AssetController",
 			"transition":"slide"
-		},{	"path":"/new_assets/:id/:mode",	
+		},
+		{	"path":"/assets/:mode/:asset_type",	
+			"layout":"layouts/main",		
+			"template":"assets", 
+			"title":"Assets",
+			"class":"assets",
+			"controller":"AssetController",
+			"transition":"slide"
+		},
+		{	"path":"/new_assets/:id/:mode",	
 			"layout":"layouts/main",		
 			"template":"new_assets", 
 			"title":"New Assets",
