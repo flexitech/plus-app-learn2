@@ -23,6 +23,6 @@
 			"transition":"slide"
 		},
 		
-		{ "otherwise" : "/home" }
+		{ "otherwise" : "/startup" }
 	]
 }

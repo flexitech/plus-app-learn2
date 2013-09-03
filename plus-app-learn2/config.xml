@@ -6,10 +6,10 @@
         id        = "com.angkorone.plusapplearn2"
         version   = "1.0.0">
 
-    <name>PlusIO App - Renthouse Management</name>
+    <name>PlusIO App - Fannow</name>
 
     <description>
-		Asset Management system
+		Fannow Like App
     </description>
 
     <author href="http://angkorone.com" email="info@angkorone.com">
