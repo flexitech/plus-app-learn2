@@ -2,64 +2,68 @@
 
 	<div id="scrollview-listing" class="scrollview-listing" >
 		<div id="scroller" style="position:absolute;width:100%;">
-			<div class="banner" style="width:100%;background-color:#282826;">
-			
-				<ul class="bxslider">
-					<li><img style="width:100%;height:auto" src="app/themes/Fannow/img/Fannow/banner/banner_event_01.jpg" alt="banner_event_01_l" title="banner_event_01_l"/></li>
-					<li><img  style="width:100%;height:auto" src="app/themes/Fannow/img/Fannow/banner/banner_event_02.jpg" alt="banner_event_02_l" title="banner_event_02_l"/></li>
-				</ul>
-			</div>
 			<div class="button-listing-type" style="">
 				<button class="btn button-home showListing">Listing</button> <button class="btn button-home showMap">Map</button>
 			</div>
+			
 			<!---- middle part -->
 			<div class="mid-group-tab">
-				<div class="listing-group slideIn">
-					<div class="listing">
-						<div class="listing-title" style="">
-							<h3>Movies</h3>
-						</div>
-						<div class="listing-body" id="movieslist-scroller">
-							<div id="scroller" class="scroller-horiz" >
-								<div ng-repeat="movie in movies" class="listing-box" style="">
-									<div class="listing-image-box">
-										<img ng-src="{{ app.paths.theme('img/fannow/movie image/' + movie.src) }}" />
-									</div>
-									<div class="listing-caption">	
-										<h4>{{movie.title}}</h4>
-									</div>
-								</div>
-								
-							</div>
-						</div>
+				<div class="listing-parent-group slideIn">
+					<div class="banner" style="width:100%;background-color:#282826;">
+					
+						<ul class="bxslider">
+							<li><img style="width:100%;height:auto" src="app/themes/Fannow/img/Fannow/banner/banner_event_01.jpg" alt="banner_event_01_l" title="banner_event_01_l"/></li>
+							<li><img  style="width:100%;height:auto" src="app/themes/Fannow/img/Fannow/banner/banner_event_02.jpg" alt="banner_event_02_l" title="banner_event_02_l"/></li>
+						</ul>
 					</div>
-					<div class="listing">
-						<div class="listing-title" style="">
-							<h3>Events</h3>
-						</div>
-						<div class="listing-body" id="event-scroller">
-							<div id="scroller" class="scroller-horiz" >
-								<div ng-repeat="event in events" class="listing-box event" style="">
-									<div class="listing-image-box">
-										<img ng-src="{{ app.paths.theme('img/fannow/event/' + event.src) }}" />
+				
+					<div class="listing-group slideIn">
+						<div class="listing">
+							<div class="listing-title" style="">
+								<h3>Movies</h3>
+							</div>
+							<div class="listing-body" id="movieslist-scroller">
+								<div id="scroller" class="scroller-horiz" >
+									<div ng-repeat="movie in movies" class="listing-box" style="">
+										<div class="listing-image-box">
+											<img ng-src="{{ app.paths.theme('img/fannow/movie image/' + movie.src) }}" />
+										</div>
+										<div class="listing-caption">	
+											<h4>{{movie.title}}</h4>
+										</div>
 									</div>
 									
 								</div>
-								
 							</div>
 						</div>
-					</div>
-					<div class="listing">
-						<div class="listing-title" style="">
-							<h3>Coupons</h3>
-						</div>
-						<div class="listing-body" id="coupon-scroller">
-							<div id="scroller" class="scroller-horiz" >
-								<div ng-repeat="event in events" class="listing-box event" style="">
-									<div class="listing-image-box">
-										<img ng-src="{{ app.paths.theme('img/fannow/event/' + event.src) }}" />
+						<div class="listing">
+							<div class="listing-title" style="">
+								<h3>Events</h3>
+							</div>
+							<div class="listing-body" id="event-scroller">
+								<div id="scroller" class="scroller-horiz" >
+									<div ng-repeat="event in events" class="listing-box event" style="">
+										<div class="listing-image-box">
+											<img ng-src="{{ app.paths.theme('img/fannow/event/' + event.src) }}" />
+										</div>
+										
 									</div>
 									
+								</div>
+							</div>
+						</div>
+						<div class="listing">
+							<div class="listing-title" style="">
+								<h3>Coupons</h3>
+							</div>
+							<div class="listing-body" id="coupon-scroller">
+								<div id="scroller" class="scroller-horiz" >
+									<div ng-repeat="event in events" class="listing-box event" style="">
+										<div class="listing-image-box">
+											<img ng-src="{{ app.paths.theme('img/fannow/event/' + event.src) }}" />
+										</div>
+										
+									</div>
 								</div>
 							</div>
 						</div>
@@ -104,15 +108,15 @@
 	});
 	$(".showListing").click(function(){
 		$(".map-group").addClass('slideIn');
-		$(".listing-group").addClass('slideIn');
-		$(".listing-group").removeClass('slideOut');
+		$(".listing-parent-group").addClass('slideIn');
+		$(".listing-parent-group").removeClass('slideOut');
 		$(".map-group").removeClass('slideOut');
 		
 	});
 	$(".showMap").click(function(){
-		$(".listing-group").removeClass('slideIn');
+		$(".listing-parent-group").removeClass('slideIn');
 		$(".map-group").removeClass('slideIn');
 		$(".map-group").addClass('slideOut');
-		$(".listing-group").addClass('slideOut');
+		$(".listing-parent-group").addClass('slideOut');
 	});
 </script>

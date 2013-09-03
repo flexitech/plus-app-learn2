@@ -277,9 +277,9 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 .mid-group-tab div{
 	display:block;
 }
-.mid-group-tab .listing-group{
+.mid-group-tab .listing-parent-group{
 	width:100%;
-	
+	position:relative;
 }
 .mid-group-tab .map-group{
 	position:absolute;
