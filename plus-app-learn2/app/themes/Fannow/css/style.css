@@ -323,6 +323,9 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	bottom:0px;
 	background: #1c1c1c;
 	top:0px;
-	left:0px;
+	/*left:0px;*/
 	color:black;
+	
+	height:100%;
+	position:relative;
 }
