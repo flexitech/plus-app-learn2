@@ -261,6 +261,8 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	height:40px;background-color:rgb(230,230,230);
 	padding:5px;
 	text-align:center;
+	top:0px;
+	position:relative;
 }
 .button-home.select,.button-home:hover{
 	/*background-image:url("../img/fannow/btn_home_left_over.png");*/
@@ -286,6 +288,7 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	left:100%;
 	top:0px;
 	width:100%;
+	bottom:0px;
 }
 @keyframes slideOut {
   0% { -webkit-transform: translate3d(0%,0,0); transform: translate3d(0%,0,0);}
@@ -313,4 +316,13 @@ footer .navbar-inner .container-fluid .menu ul li.active,footer .navbar-inner .c
 	animation: slideIn 0.3s;
 	-webkit-animation: slideIn 0.3s;
 	-webkit-transform: translate3d(0%, 0, 0);
+}
+.leaflet-container {
+	position: absolute;
+	width: 100%;
+	bottom:0px;
+	background: #1c1c1c;
+	top:0px;
+	left:0px;
+	color:black;
 }

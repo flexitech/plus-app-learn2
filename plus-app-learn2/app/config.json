@@ -13,7 +13,7 @@
 	/*
 	 * plugins add to the functionality of Plus.io Frontend
 	 */
-	"plugins" : [],
+	"plugins" : ["leaflet"],
 
 	/*
 	 * This array specifies the names of javascript files in your app/includes/scripts folder

@@ -70,7 +70,14 @@
 					</div>
 				</div>
 				<div class="map-group slideIn">
-					Map
+					<!-- This custom directive made by David Rubert (https://github.com/tombatossals/angular-leaflet-directive) creates a custom element called <leaflet> which inludes a map on the page using the leaflet.js library (http://leafletjs.com/) -->
+
+					<leaflet 
+						id="leaflet"
+						defaults="leaflet.defaults"
+						center="leaflet.center"
+						markers="leaflet.markers"
+					></leaflet>
 				</div>
 			</div>
 			<!-- end middle part -->
@@ -98,7 +105,8 @@ try{
 		couponScroller.refresh();
 		eventScroller.refresh();
 		movieScroller.refresh();
-		myScroll2.refresh();
+		if (myScroll2!=null)
+			myScroll2.refresh();
 	},1000);
 	$(document).ready(function(){
 		$('.bxslider').bxSlider({
@@ -112,13 +120,24 @@ try{
 		$(".listing-parent-group").addClass('slideIn');
 		$(".listing-parent-group").removeClass('slideOut');
 		$(".map-group").removeClass('slideOut');
-		
+		myScroll2  = new iScroll($('.scrollview-listing')[0],{useObject:true,vScrollbar:false});	
+		myScroll2.options.onBeforeScrollStart = function(e) {                
+	        var target = e.target;
+
+	        while (target.nodeType != 1) target = target.parentNode;
+
+	        if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA'){
+	            e.preventDefault();
+	        }
+	    }
 	});
 	$(".showMap").click(function(){
 		$(".listing-parent-group").removeClass('slideIn');
 		$(".map-group").removeClass('slideIn');
 		$(".map-group").addClass('slideOut');
 		$(".listing-parent-group").addClass('slideOut');
+		myScroll2.destroy();
+		myScroll2=null;
 	});
 	}
 	catch(e){

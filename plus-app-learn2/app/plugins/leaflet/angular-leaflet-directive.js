@@ -1,3 +1,5 @@
+
+
 var leafletDirective = angular.module("leaflet-directive", []);
 
 $app.directive("leaflet", ["$http", "$log", function ($http, $log) {
@@ -39,7 +41,7 @@ $app.directive("leaflet", ["$http", "$log", function ($http, $log) {
         link: function ($scope, element, attrs /*, ctrl */) {
             var map = new L.Map(element[0]);
             map.setView([0, 0], 1);
-
+			
             $scope.leaflet = {};
             $scope.leaflet.map = !!attrs.testing ? map : 'Add testing="testing" to <leaflet> tag to inspect this object';
             $scope.leaflet.maxZoom = !!(attrs.defaults && $scope.defaults && $scope.defaults.maxZoom) ? parseInt($scope.defaults.maxZoom, 10) : defaults.maxZoom;
